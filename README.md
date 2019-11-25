@@ -22,6 +22,7 @@ copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -99,7 +100,12 @@ Users logged in to an Apple device can quickly sign in to your app in the follow
 ### How to use `SignInUI`
 
 ```Swift
+import UIKit
+import PlaceUIKit
+import AuthenticationServices
+
 class SignInViewController: UIViewController, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
     @IBOutlet weak var appLogoImageView: UIImageView!
     @IBOutlet weak var appTitleLabel: UILabel!
     @IBOutlet weak var signInButtonView: UIView!
@@ -116,29 +122,30 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         SignInUI.requestExistingAccount(from: self)
     }
-    
+
     func setupUI() {
         SignInUI.setupAppLogo(appLogoImageView, url: "img_app_logo")
         SignInUI.setupAppTitle(appTitleLabel, text: "My App")
-        SignInUI.setupSignInButton(in: signInButtonView, style: .black, action: #selector(didTapSignInButton()))
+        SignInUI.setupSignInButton(self, in: signInButtonView, style: .black, action: #selector(didTapSignInButton))
         SignInUI.setupAppVersion(versionLabel)
         SignInUI.setupAppCopyright(copyrightLabel, text: "© 2019 Jaesung")
     }
     
+
     @objc func didTapSignInButton() {
         SignInUI.didTapSignInButton(on: self)
     }
-    
+
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
-            
-            let userInfo = SingInUI.fetchAppleIDCredential(appleIDCredential)
-            
+
+            let userInfo = SignInUI.fetchAppleIDCredential(appleIDCredential)
+
             DispatchQueue.main.async {
-                self.username = userInfo[1] + userInfo[2]
+                self.username = (userInfo[1] ?? "") + (userInfo[2] ?? "")
                 self.useremail = userInfo[3]
             }
         } else if let passwordCredential = authorization.credential as? ASPasswordCredential {
@@ -148,6 +155,10 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
                 self.useremail = userInfo[3]
             }
         }
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
 

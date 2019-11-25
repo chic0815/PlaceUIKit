@@ -77,12 +77,12 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    public static func setupSignInButton(on view: UIView, yValue: CGFloat, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
+    public static func setupSignInButton(_ target: Any?, on view: UIView, yValue: CGFloat, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         // TODO: If there is userdefault value about auto-signIn, type must be `.continue`
         
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
         button.frame = CGRect(x: 20, y: yValue, width: view.frame.width - 40, height: 60)
-        button.addTarget(self, action: action, for: .touchUpInside)
+        button.addTarget(target, action: action, for: .touchUpInside)
         
         button.cornerRadius = button.frame.height / 4   // 15.0
         button.layer.masksToBounds = true
@@ -103,10 +103,10 @@ extension SignInUI {
      - Available: iOS 13.0 or later
      
      */
-    public static func setupSignInButton(in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
+    public static func setupSignInButton(_ target: Any?, in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
         button.frame = CGRect(x: 0, y: 0, width: view.frame.minX + view.frame.maxX, height: view.frame.height)
-        button.addTarget(self, action: action, for: .touchUpInside)
+        button.addTarget(target, action: action, for: .touchUpInside)
         
         button.cornerRadius = button.frame.height / 4   // 15.0
         button.layer.masksToBounds = true
