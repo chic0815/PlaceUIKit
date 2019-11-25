@@ -103,7 +103,7 @@ extension SignInUI {
      */
     public static func setupSignInButton(in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
-        button.frame = view.frame
+        button.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
         button.addTarget(self, action: action, for: .touchUpInside)
         
         button.cornerRadius = button.frame.height / 4   // 15.0
