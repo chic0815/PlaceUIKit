@@ -94,6 +94,8 @@ extension SignInUI {
     /**
      This method requires specific `UIView` only for SignIn Button.  SignIn Button will be fit on the view.
      
+     - Important: The view must have only leading and trailing constrains rather than width.
+     
      - Since: 1.0.0
      
      - Copyright: © 2019 Jaesung.
@@ -103,7 +105,7 @@ extension SignInUI {
      */
     public static func setupSignInButton(in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
-        button.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.width)
+        button.frame = CGRect(x: 0, y: 0, width: view.frame.minX + view.frame.maxX, height: view.frame.height)
         button.addTarget(self, action: action, for: .touchUpInside)
         
         button.cornerRadius = button.frame.height / 4   // 15.0
