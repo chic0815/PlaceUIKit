@@ -191,3 +191,30 @@ class SignInViewController: UIViewController, ASAuthorizationControllerDelegate,
 }
 
 ```
+
+
+### How to use `MapUI`
+
+```Swift
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+    @IBOutlet weak var mapView: MKMapView!
+    
+    var locationMangager = CLLocationManager()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        MapUI.setupMapView(mapView, on: self, isShowUserLocation: true)
+    }
+    
+    // Request Permission
+    override func viewDidAppear(_ animated: Bool) {
+        MapUI.configureLocationManager(locationMangager, on: self)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        MapUI.locationManger(manager, updated: locations, on: self.mapView)
+    }
+}
+
+```
