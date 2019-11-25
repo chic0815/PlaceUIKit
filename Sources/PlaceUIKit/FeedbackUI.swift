@@ -14,13 +14,13 @@ public class FeedbackUI {
         
     }
     
-    public static func setupSendButton(_ button: UIButton, action: Selector) {
+    public static func setupSendButton(_ button: UIButton,) {
         button.setTitle("Send", for: .normal)
         button.setTitleColor(PlaceUI.color(.whiteSnow), for: .normal)
         button.backgroundColor = PlaceUI.color(.purple)
     }
     
-    public static func setupSendButton(_ button: UIButton, initialTitle: String, action: Selector) {
+    public static func setupSendButton(_ button: UIButton, initialTitle: String) {
         button.setTitle(initialTitle, for: .normal)
         button.setTitleColor(PlaceUI.color(.whiteSnow), for: .normal)
         button.backgroundColor = PlaceUI.color(.purple)

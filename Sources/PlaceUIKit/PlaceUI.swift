@@ -17,7 +17,7 @@ public enum Color {
     case lightPink
 }
 
-class PlaceUI {
+public class PlaceUI {
     public static func color(_ color: Color) -> UIColor {
         switch color {
         case .purple:
