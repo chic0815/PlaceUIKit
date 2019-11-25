@@ -33,5 +33,46 @@ class PlaceUI {
         }
     }
     
+    
+    /**
+     "🥰 Like"
+     */
+    static func setupButton(_ button: UIButton, title: String, iconURL: String?) {
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(color(.whiteSnow), for: .normal)
+        button.backgroundColor = self.color(.purple)
+        
+        guard let url = iconURL else { return }
+        
+        if #available(iOS 13.0, *) {
+            if let systemImage = UIImage(systemName: url) {
+                button.setImage(systemImage, for: .normal)
+                button.tintColor = self.color(.purple)
+                
+                return
+            }
+        }
+        
+        if let customImage = UIImage(named: url) {
+            button.setImage(customImage, for: .normal)
+            
+            return
+        }
+    }
+    
+    
+    
+    static func setupButton(_ button: UIButton, imageURL: String) {
+        if #available(iOS 13.0, *) {
+            if let systemImage = UIImage(systemName: imageURL) {
+                button.setBackgroundImage(systemImage, for: .normal)
+                button.tintColor = self.color(.purple)
+                
+                return
+            }
+        }
+        button.setBackgroundImage(UIImage(named: imageURL), for: .normal)
+    }
+    
 }
 
