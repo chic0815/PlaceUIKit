@@ -14,7 +14,7 @@ public class FeedbackUI {
         
     }
     
-    public static func setupSendButton(_ button: UIButton,) {
+    public static func setupSendButton(_ button: UIButton) {
         button.setTitle("Send", for: .normal)
         button.setTitleColor(PlaceUI.color(.whiteSnow), for: .normal)
         button.backgroundColor = PlaceUI.color(.purple)
