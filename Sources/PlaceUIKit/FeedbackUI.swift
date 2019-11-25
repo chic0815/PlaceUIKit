@@ -37,7 +37,7 @@ public class FeedbackUI {
         textView.textColor = PlaceUI.color(.lightPurple)
         textView.backgroundColor = PlaceUI.color(.whiteSnow)
         
-        textView.layer.cornerRadius = textView.frame.height / 4
+        textView.layer.cornerRadius = 15.0
         textView.layer.masksToBounds = true
         
         textView.layer.borderColor = PlaceUI.color(.lightPurple).cgColor
