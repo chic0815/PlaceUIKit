@@ -18,18 +18,27 @@ public class FeedbackUI {
         button.setTitle("Send", for: .normal)
         button.setTitleColor(PlaceUI.color(.whiteSnow), for: .normal)
         button.backgroundColor = PlaceUI.color(.purple)
+        
+        button.layer.cornerRadius = button.frame.height / 4
+        button.layer.masksToBounds = true
     }
     
     public static func setupSendButton(_ button: UIButton, initialTitle: String) {
         button.setTitle(initialTitle, for: .normal)
         button.setTitleColor(PlaceUI.color(.whiteSnow), for: .normal)
         button.backgroundColor = PlaceUI.color(.purple)
+        
+        button.layer.cornerRadius = button.frame.height / 4
+        button.layer.masksToBounds = true
     }
     
     public static func setupTextView(_ textView: UITextView, initialText: String) {
         textView.text = initialText
         textView.textColor = PlaceUI.color(.lightPurple)
         textView.backgroundColor = PlaceUI.color(.whiteSnow)
+        
+        textView.layer.cornerRadius = textView.frame.height / 4
+        textView.layer.masksToBounds = true
         
         textView.layer.borderColor = PlaceUI.color(.lightPurple).cgColor
         textView.layer.borderWidth = 2.0
