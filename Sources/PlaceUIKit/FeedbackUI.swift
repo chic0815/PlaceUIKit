@@ -41,7 +41,7 @@ public class FeedbackUI {
         textView.layer.masksToBounds = true
         
         textView.layer.borderColor = PlaceUI.color(.lightPurple).cgColor
-        textView.layer.borderWidth = 2.0
+        textView.layer.borderWidth = 1.0
     }
     
     public static func setupMessageLabel(_ label: UILabel) {
