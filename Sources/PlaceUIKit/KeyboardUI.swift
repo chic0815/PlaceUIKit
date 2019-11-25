@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol KeyboardImplementable {
+public protocol KeyboardImplementable {
     var isKeyboardShown: Bool { get set }
 }
 /**
@@ -19,23 +19,23 @@ protocol KeyboardImplementable {
     - `textViewFromBottom`
  */
 @available(iOS 10.0, *)
-class KeyboardUI {
-    static func keyboardWillShow(action: Selector) {
+public class KeyboardUI {
+    public static func keyboardWillShow(action: Selector) {
         NotificationCenter.default.addObserver(self, selector: action, name: UIWindow.keyboardWillShowNotification, object: nil)
     }
     
-    static func keyboardWillHide(action: Selector) {
+    public static func keyboardWillHide(action: Selector) {
         NotificationCenter.default.addObserver(self, selector: action, name: UIWindow.keyboardWillHideNotification, object: nil)
     }
     
-    static func distanceToMove(_ notification: Notification, textView: UITextView, view: UIView) -> CGFloat {
+    public static func distanceToMove(_ notification: Notification, textView: UITextView, view: UIView) -> CGFloat {
         guard let keyboardFrameBegin = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else  { return 0.0 }
         let keyboardFrameBeginRect = keyboardFrameBegin.cgRectValue
         let keyboardHeight = keyboardFrameBeginRect.size.height
         return keyboardHeight + textView.frame.maxY - view.frame.maxY + CGFloat(8.0)
     }
     
-    static func distanceToMove(_ notification: Notification, textField: UITextField, view: UIView) -> CGFloat {
+    public static func distanceToMove(_ notification: Notification, textField: UITextField, view: UIView) -> CGFloat {
         guard let keyboardFrameBegin = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else  { return 0.0 }
         let keyboardFrameBeginRect = keyboardFrameBegin.cgRectValue
         let keyboardHeight = keyboardFrameBeginRect.size.height
@@ -55,7 +55,7 @@ class KeyboardUI {
      }
      ```
      */
-    static func keyboardWillShow(textView: UITextField, logoImageView: UIImageView, titleLabel: UILabel, messageLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textViewFromBottom: NSLayoutConstraint, contentView: UIView, distanceToMove: CGFloat) {
+    public static func keyboardWillShow(textView: UITextField, logoImageView: UIImageView, titleLabel: UILabel, messageLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textViewFromBottom: NSLayoutConstraint, contentView: UIView, distanceToMove: CGFloat) {
         logoImageView.alpha = 1.0
         titleLabel.alpha = 0
         messageLabel.alpha = 0
@@ -69,7 +69,7 @@ class KeyboardUI {
         animator.startAnimation()
     }
     
-    static func keyboardWillShow(textField: UITextField, logoImageView: UIImageView, titleLabel: UILabel, messageLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textFieldFromBottom: NSLayoutConstraint, contentView: UIView, distanceToMove: CGFloat) {
+    public static func keyboardWillShow(textField: UITextField, logoImageView: UIImageView, titleLabel: UILabel, messageLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textFieldFromBottom: NSLayoutConstraint, contentView: UIView, distanceToMove: CGFloat) {
         logoImageView.alpha = 1.0
         titleLabel.alpha = 0
         messageLabel.alpha = 0
@@ -92,7 +92,7 @@ class KeyboardUI {
     }
     ```
     */
-    func keyboardWillHide(logoImageView: UIImageView, titleLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textFieldFromBottom: NSLayoutConstraint, contentView: UIView) {
+    public func keyboardWillHide(logoImageView: UIImageView, titleLabel: UILabel, constraintFromCenter: NSLayoutConstraint, textFieldFromBottom: NSLayoutConstraint, contentView: UIView) {
         constraintFromCenter.constant = -30
         textFieldFromBottom.constant = 140
         

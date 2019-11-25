@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-protocol MapUIImplementable {
+public protocol MapUIImplementable {
     /**
      ```Swift
      func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
@@ -36,7 +36,7 @@ protocol MapUIImplementable {
     func updateAnnotation()
 }
 
-protocol MapUINavigatable {
+public protocol MapUINavigatable {
     /**
      ```Swift
      func drawRoute(from:to:named:on:)
@@ -56,23 +56,23 @@ protocol MapUINavigatable {
 /**
  Before use this class, you need to declare `MKMapView` as a variable first.
  */
-class MapUI {
+public class MapUI {
     // MARK: - CLLocationManagerDelegate
     // TODO: Required??
-    static func setupMapView(_ mapView: MKMapView, on viewController: UIViewController & MKMapViewDelegate, isShowUserLocation: Bool) {
+    public static func setupMapView(_ mapView: MKMapView, on viewController: UIViewController & MKMapViewDelegate, isShowUserLocation: Bool) {
         mapView.delegate = viewController
         mapView.showsUserLocation = isShowUserLocation
     }
     
     
-    static func configureLocationManager(_ locationManager: CLLocationManager, on viewController: CLLocationManagerDelegate) {
+    public static func configureLocationManager(_ locationManager: CLLocationManager, on viewController: CLLocationManagerDelegate) {
         locationManager.delegate = viewController
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
     }
     
-    static func locationManger(_ locationManager: CLLocationManager, updated locations: [CLLocation], on mapView: MKMapView) {
+    public static func locationManger(_ locationManager: CLLocationManager, updated locations: [CLLocation], on mapView: MKMapView) {
         let location = locations.last
         let center = CLLocationCoordinate2D(latitude: location!.coordinate.latitude, longitude: location!.coordinate.longitude)
         let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 1 / 500, longitudeDelta: 1 / 500))
@@ -84,7 +84,7 @@ class MapUI {
 
 extension MapUI {
     
-    func annotationView(for annotation: MKAnnotation, identifier: String, pinImage: UIImage) -> MKAnnotationView {
+    public func annotationView(for annotation: MKAnnotation, identifier: String, pinImage: UIImage) -> MKAnnotationView {
         let identifier = "place"
         let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
         
@@ -100,7 +100,7 @@ extension MapUI {
         return annotationView
     }
     
-    func updateAnnotation(of places: [MKAnnotation], on mapView: MKMapView) {
+    public func updateAnnotation(of places: [MKAnnotation], on mapView: MKMapView) {
         for i in 0 ..< places.count {
             mapView.addAnnotation(places[i])
         }
@@ -111,7 +111,7 @@ extension MapUI {
 // Draw Route
 @available(iOS 10.0, *)
 extension MapUI {
-    func drawRoute(from startLocation: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, named title: String, on mapView: MKMapView) {
+    public func drawRoute(from startLocation: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D, named title: String, on mapView: MKMapView) {
         let startPlacemark = MKPlacemark(coordinate: startLocation)
         let destinationPlacemark = MKPlacemark(coordinate: destination)
         
@@ -161,7 +161,7 @@ extension MapUI {
         }
     }
     
-    func configureRoute(_ overlay: MKOverlay) -> MKOverlayRenderer {
+    public func configureRoute(_ overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = PlaceUI.color(.purple)
         renderer.lineWidth = 4.0

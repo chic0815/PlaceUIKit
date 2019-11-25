@@ -9,7 +9,7 @@ import Foundation
 
 import UIKit
 
-enum Color {
+public enum Color {
     case purple
     case lightPurple
     case whiteSnow
@@ -18,7 +18,7 @@ enum Color {
 }
 
 class PlaceUI {
-    static func color(_ color: Color) -> UIColor {
+    public static func color(_ color: Color) -> UIColor {
         switch color {
         case .purple:
             return UIColor.init(red: 109 / 255, green: 118 / 255, blue: 181 / 255, alpha: 1.0)
@@ -37,7 +37,7 @@ class PlaceUI {
     /**
      "🥰 Like"
      */
-    static func setupButton(_ button: UIButton, title: String, iconURL: String?) {
+    public static func setupButton(_ button: UIButton, title: String, iconURL: String?) {
         button.setTitle(title, for: .normal)
         button.setTitleColor(color(.whiteSnow), for: .normal)
         button.backgroundColor = self.color(.purple)
@@ -62,7 +62,7 @@ class PlaceUI {
     
     
     
-    static func setupButton(_ button: UIButton, imageURL: String) {
+    public static func setupButton(_ button: UIButton, imageURL: String) {
         if #available(iOS 13.0, *) {
             if let systemImage = UIImage(systemName: imageURL) {
                 button.setBackgroundImage(systemImage, for: .normal)

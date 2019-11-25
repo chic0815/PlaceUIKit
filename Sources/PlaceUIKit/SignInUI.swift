@@ -13,13 +13,13 @@ import AuthenticationServices
  
  - Copyright: © 2019 Jaesung.
  */
-class SignInUI {
+public class SignInUI {
     /**
      - Since: 1.0.0
      
      - Copyright: © 2019 Jaesung.
      */
-    static func setupAppLogo(_ imageView : UIImageView, url: String) {
+    public static func setupAppLogo(_ imageView : UIImageView, url: String) {
         imageView.image = UIImage(named: url)
     }
     
@@ -29,7 +29,7 @@ class SignInUI {
      
      - Copyright: © 2019 Jaesung.
      */
-    static func setupAppTitle(_ label: UILabel, text: String) {
+    public static func setupAppTitle(_ label: UILabel, text: String) {
         label.text = text
         label.textColor = PlaceUI.color(.purple)
         label.textAlignment = .center
@@ -42,7 +42,7 @@ class SignInUI {
      
      - Copyright: © 2019 Jaesung.
      */
-    static func setupAppVersion(_ label: UILabel) {
+    public static func setupAppVersion(_ label: UILabel) {
         // info.plist ????
         guard let dictionary = Bundle.main.infoDictionary, let text = dictionary["CFBundleShortVersionString"] as? String else { return }
         label.text = text
@@ -58,7 +58,7 @@ class SignInUI {
      
      - Copyright: © 2019 Jaesung.
      */
-    static func setupAppCopyright(_ label: UILabel, text: String) {
+    public static func setupAppCopyright(_ label: UILabel, text: String) {
         label.text = text
         label.textColor = PlaceUI.color(.purple)
         label.textAlignment = .center
@@ -77,7 +77,7 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    static func setupSignInButton(on view: UIView, yValue: CGFloat, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
+    public static func setupSignInButton(on view: UIView, yValue: CGFloat, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         // TODO: If there is userdefault value about auto-signIn, type must be `.continue`
         
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
@@ -101,7 +101,7 @@ extension SignInUI {
      - Available: iOS 13.0 or later
      
      */
-    static func setupSignInButton(in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
+    public static func setupSignInButton(in view: UIView, style: ASAuthorizationAppleIDButton.Style, action: Selector) {
         let button = ASAuthorizationAppleIDButton(type: .signIn, style: style)
         button.frame = view.frame
         button.addTarget(self, action: action, for: .touchUpInside)
@@ -126,7 +126,7 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    static func didTapSignInButton(on viewController: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
+    public static func didTapSignInButton(on viewController: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -148,7 +148,7 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    static func requestExistingAccount(from viewController: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
+    public static func requestExistingAccount(from viewController: ASAuthorizationControllerDelegate & ASAuthorizationControllerPresentationContextProviding) {
         // Prepare requests for both Apple ID and password providers.
         let requests = [ASAuthorizationAppleIDProvider().createRequest(),
                         ASAuthorizationPasswordProvider().createRequest()]
@@ -172,7 +172,7 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    static func authenticatedSuccessfully(with authorization: ASAuthorization) -> [String?] {
+    public static func authenticatedSuccessfully(with authorization: ASAuthorization) -> [String?] {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             
             return fetchAppleIDCredential(appleIDCredential)
@@ -196,7 +196,7 @@ extension SignInUI {
      
      - Available: iOS 13.0 or later
      */
-    static func fetchAppleIDCredential(_ appleIDCredential: ASAuthorizationAppleIDCredential) -> [String?] {
+    public static func fetchAppleIDCredential(_ appleIDCredential: ASAuthorizationAppleIDCredential) -> [String?] {
         
         let userIdentifier = appleIDCredential.user
         let fullName = appleIDCredential.fullName
@@ -205,7 +205,7 @@ extension SignInUI {
         return [userIdentifier, fullName?.givenName, fullName?.familyName, email]
     }
     
-    static func fetchPasswordCredential(_ passwordCredential: ASPasswordCredential) -> [String] {
+    public static func fetchPasswordCredential(_ passwordCredential: ASPasswordCredential) -> [String] {
         // Sign in using an existing iCloud Keychain credential.
         let username = passwordCredential.user
         let password = passwordCredential.password
