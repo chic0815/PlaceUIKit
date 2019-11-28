@@ -62,6 +62,11 @@ public class MapUI {
     public static func setupMapView(_ mapView: MKMapView, on viewController: UIViewController & MKMapViewDelegate, isShowUserLocation: Bool) {
         mapView.delegate = viewController
         mapView.showsUserLocation = isShowUserLocation
+        if #available(iOS 13.0, *) {
+            mapView.pointOfInterestFilter = .excludingAll
+        } else {
+            mapView.showsPointsOfInterest = false
+        }
     }
     
     
